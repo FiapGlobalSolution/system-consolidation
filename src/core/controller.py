@@ -186,6 +186,11 @@ class FarmTechController:
         return self.sensor_handler.adicionar_leitura(
             umidade, ph, fosforo, potassio, temperatura
         )
+
+         # NOVO — verifica alertas e envia para AWS se tiver crítico
+        self.sensor_handler.verificar_alertas()
+
+        return dado
     
     def obter_ultima_leitura_sensor(self):
         """Retorna última leitura de sensor"""
