@@ -4,7 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from fase1.climate_service import ClimaService
 
 # Configurações do Banco de Dados (substitua pelos seus dados)
-DB_URL = "oracle+cx_oracle://usuario:senha@host:porta/service_name"
+DB_URL = "oracle+cx_oracle://RM563810:270506@ORACLE.FIAP.COM.BR:1521/ORCL"
+
 
 # Inicializando SQLAlchemy
 engine = create_engine(DB_URL)
