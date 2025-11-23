@@ -201,16 +201,16 @@ class FarmTechController:
         return self.sensor_handler.obter_estatisticas()
     
     def obter_alertas_sensores(self) -> List[str]:
-    """Verifica alertas e também dispara AWS se houver crítico"""
+        """Verifica alertas e também dispara AWS se houver crítico"""
 
-    alertas = self.sensor_handler.verificar_alertas()
+        alertas = self.sensor_handler.verificar_alertas()
 
-    # Se houver alertas, envia para AWS (segurança extra)
-    if alertas:
-        mensagem = " | ".join(alertas)
-        send_alert(f"ALERTA DO CONTROLLER: {mensagem}")
+        # Se houver alertas, envia para AWS (segurança extra)
+        if alertas:
+            mensagem = " | ".join(alertas)
+            send_alert(f"ALERTA DO CONTROLLER: {mensagem}")
 
-    return alertas
+        return alertas
     
     # ========================================
     # MÉTODOS PARA FASE 4: Machine Learning
