@@ -23,7 +23,7 @@ meteo_table = Table(
 metadata.create_all(engine)  # Cria a tabela caso não exista
 
 # Inicializando o serviço de clima
-API_KEY = "SUA_CHAVE_API"
+API_KEY = "c7d2cf1a2b68e7acac01b2ad0de3b433"
 clima_service = ClimaService(API_KEY)
 
 def obter_dados_para_banco(cidade: str):
