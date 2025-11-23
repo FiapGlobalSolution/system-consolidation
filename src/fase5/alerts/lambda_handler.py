@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     mensagem = json.dumps(event)
 
     # ARN do tópico
-    SNS_TOPIC_ARN = "ARN_DO_SEU_SNS_AQUI"
+    SNS_TOPIC_ARN = "arn:aws:lambda:us-east-2:440185825667:function:farmtech-alerts-lambda"
 
     # Envia alerta
     sns.publish(
@@ -31,3 +31,4 @@ def lambda_handler(event, context):
     )
 
     return {"status": "alerta_enviado"}
+
