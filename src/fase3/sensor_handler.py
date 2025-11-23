@@ -7,6 +7,8 @@ import random
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 from dataclasses import dataclass, asdict
+from aws_alert import send_alert
+
 
 
 @dataclass
@@ -234,6 +236,11 @@ class SensorHandler:
             alertas.append("⚠️ Fósforo (P) não detectado")
         if not self.ultima_leitura.potassio_presente:
             alertas.append("⚠️ Potássio (K) não detectado")
+
+        # ENVIAR PARA AWS SE TIVER ALERTA CRÍTICO
+        if alertas:  
+            mensagem = " | ".join(alertas)  
+            send_alert(f"ALERTA DETECTADO: {mensagem}")
         
         return alertas
 
