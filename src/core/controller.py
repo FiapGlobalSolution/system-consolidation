@@ -168,29 +168,33 @@ class FarmTechController:
         return self.sensor_handler.gerar_dados_simulados(n_leituras)
     
     def adicionar_leitura_sensor(self, umidade: float, ph: float,
-                                 fosforo: bool, potassio: bool,
-                                 temperatura: Optional[float] = None):
-        """
-        Adiciona nova leitura de sensor
+                             fosforo: bool, potassio: bool,
+                             temperatura: Optional[float] = None):
+    """
+    Adiciona nova leitura de sensor
+    
+    Args:
+        umidade: Umidade do solo (%)
+        ph: pH do solo
+        fosforo: Presença de fósforo
+        potassio: Presença de potássio
+        temperatura: Temperatura (opcional)
         
-        Args:
-            umidade: Umidade do solo (%)
-            ph: pH do solo
-            fosforo: Presença de fósforo
-            potassio: Presença de potássio
-            temperatura: Temperatura (opcional)
-            
-        Returns:
-            SensorData criado
-        """
-        return self.sensor_handler.adicionar_leitura(
-            umidade, ph, fosforo, potassio, temperatura
-        )
+    Returns:
+        SensorData criado
+    """
+    
+    #  Criar o objeto de leitura
+    dado = self.sensor_handler.adicionar_leitura(
+        umidade, ph, fosforo, potassio, temperatura
+    )
 
-         # NOVO — verifica alertas e envia para AWS se tiver crítico
-        self.sensor_handler.verificar_alertas()
+    #  Verificar alertas (já envia para AWS se crítico)
+    self.sensor_handler.verificar_alertas()
 
-        return dado
+    # Retorna corretamente o objeto criado
+    return dado
+
     
     def obter_ultima_leitura_sensor(self):
         """Retorna última leitura de sensor"""
