@@ -3,6 +3,7 @@ Controlador Central do Sistema FarmTech
 Integra todos os módulos das Fases 1-6
 """
 
+from alerts.aws_alert import send_alert
 from typing import Optional, Dict, Any, List
 import os
 from datetime import datetime
@@ -195,8 +196,16 @@ class FarmTechController:
         return self.sensor_handler.obter_estatisticas()
     
     def obter_alertas_sensores(self) -> List[str]:
-        """Verifica e retorna alertas baseados nos sensores"""
-        return self.sensor_handler.verificar_alertas()
+    """Verifica alertas e também dispara AWS se houver crítico"""
+
+    alertas = self.sensor_handler.verificar_alertas()
+
+    # Se houver alertas, envia para AWS (segurança extra)
+    if alertas:
+        mensagem = " | ".join(alertas)
+        send_alert(f"ALERTA DO CONTROLLER: {mensagem}")
+
+    return alertas
     
     # ========================================
     # MÉTODOS PARA FASE 4: Machine Learning
@@ -344,6 +353,14 @@ class FarmTechController:
         Returns:
             Dicionário com informações de todas as fases
         """
+
+        
+        alertas = self.sensor_handler.verificar_alertas()
+        
+        if alertas:
+            mensagem = " | ".join(alertas)
+            send_alert(f"ALERTA DO DASHBOARD: {mensagem}")
+        
         resumo = {
             'fase1': {
                 'total_plantios': len(self.calculo_plantio.dados),
@@ -354,7 +371,8 @@ class FarmTechController:
             },
             'fase3': {
                 'estatisticas_sensores': self.sensor_handler.obter_estatisticas(),
-                'alertas': self.sensor_handler.verificar_alertas()
+                'alertas': alertas
+
             },
             'fase4': {
                 'modelo_info': self.ml_model.info()
