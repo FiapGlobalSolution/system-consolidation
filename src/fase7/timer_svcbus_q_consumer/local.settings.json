@@ -1,0 +1,30 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "SERVICEBUS_CONNECTION": "<SERVICEBUS_CONNECTION_STRING>",
+    "SERVICEBUS_QUEUE_NAME": "<SERVICEBUS_QUEUE_NAME>",
+    "SERVICEBUS_MAX_MESSAGE_COUNT": "50",
+    "SERVICEBUS_MAX_WAIT_TIME": "5",
+    "COSMOS_MONGO_ENABLED": "false",
+    "COSMOS_MONGO_CONN_STRING": "mongodb://<user>:<password>@<account>.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb",
+    "COSMOS_MONGO_DB": "iot-events",
+    "COSMOS_MONGO_COLLECTION": "queue-events",
+    "COSMOS_MONGO_PARTITION_FIELD": "partitionKey",
+    "SQS_ENABLED": "true",
+    "AWS_ACCESS_KEY_ID": "<AWS_ACCESS_KEY_ID>",
+    "AWS_SECRET_ACCESS_KEY": "<AWS_SECRET_ACCESS_KEY>",
+    "AWS_SESSION_TOKEN": "",
+    "AWS_REGION": "sa-east-1",
+    "SQS_QUEUE_URL": "<SQS_QUEUE_URL>",
+    "SQS_BATCH_SIZE": "15",
+    "SQS_MAX_RETRIES": "3",
+    "SNS_ENABLED": "true",
+    "SNS_TOPIC_ARN": "<SNS_TOPIC_ARN>",
+    "SNS_SUBJECT": "IoT Environmental Alert",
+    "SNS_MIN_HUMIDITY": "20",
+    "SNS_MAX_TEMPERATURE": "32",
+    "SNS_MAX_RETRIES": "3"
+  }
+}
